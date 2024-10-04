@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "440341581514",
+    "project_id": "workzone-93410",
+    "storage_bucket": "workzone-93410.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440341581514:android:e30771bc2332c0b7866e33",
+        "android_client_info": {
+          "package_name": "com.example.work_zone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHnZ0pzIHKKenqGPnAVYT5VbYPIsekv08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
