@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work_zone/controllers/auth_controller.dart';
 import 'package:work_zone/utils/app_theme.dart';
+import 'package:work_zone/views/worker/auth/worker_login_page.dart';
 import 'package:work_zone/widgets/widgets_helper.dart';
+
 
 class WorkerSignupPage extends StatefulWidget {
   const WorkerSignupPage({super.key});
@@ -48,10 +50,9 @@ class _WorkerSignupPageState extends State<WorkerSignupPage> {
                 height: 16,
               ),
               WidgetHelper.customTextField(
-                controller: _emailController,
-                labelText: 'email',
-                prefixIcon: Icons.email
-              ),
+                  controller: _emailController,
+                  labelText: 'email',
+                  prefixIcon: Icons.email),
               const SizedBox(
                 height: 16,
               ),
@@ -89,7 +90,7 @@ class _WorkerSignupPageState extends State<WorkerSignupPage> {
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
                       onPressed: () {
-                        authController.login(
+                        authController.signUp(
                           _emailController.text,
                           _passwordController.text,
                         );
@@ -126,7 +127,15 @@ class _WorkerSignupPageState extends State<WorkerSignupPage> {
                         color: AppTheme.primaryColor,
                         decoration: TextDecoration.underline,
                       ),
-                      recognizer: TapGestureRecognizer()..onTap = () {},
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const WorkerLoginPage(),
+                            ),
+                          );
+                        },
                     ),
                   ],
                 ),
