@@ -1,6 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+import 'package:work_zone/controllers/auth_controller.dart';
 import 'package:work_zone/utils/app_theme.dart';
+import 'package:work_zone/widgets/widgets_helper.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -12,27 +14,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController _emailController = TextEditingController();
   bool _isLoading = false;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  Future<void> _resetPassword() async {
-    try {
-      await _auth.sendPasswordResetEmail(email: _emailController.text.trim());
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Password rest link has been sent to your email'),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      String errorMessage = '';
-      if (e.code == 'user-not-found') {
-        errorMessage = 'No user found with this email';
-      } else {
-        errorMessage = 'An error occured.please try again.';
-      }
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(errorMessage)));
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -64,42 +46,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                TextField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Enter your email',
-                    fillColor: AppTheme.whiteColor,
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    labelStyle:
-                        AppTheme.themeData.inputDecorationTheme.labelStyle,
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
+               WidgetHelper.customTextField(controller: _emailController, labelText: 'Enter Your email'),
                 const SizedBox(height: 24),
                 _isLoading
                     ? const CircularProgressIndicator()
                     : ElevatedButton(
-                        onPressed: () async {
-                          setState(() {
-                            _isLoading = true;
-                          });
-
-                          await _resetPassword();
-
-                          setState(() {
-                            _isLoading = false;
-                          });
+                        onPressed: () {
+                         AuthController().resetPassword(_emailController.text,context);
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(

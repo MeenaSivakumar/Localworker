@@ -16,9 +16,10 @@ class WorkerSignupPage extends StatefulWidget {
 }
 
 class _WorkerSignupPageState extends State<WorkerSignupPage> {
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
+  
   bool _agreeToTerms = false;
 
   @override
@@ -46,6 +47,7 @@ class _WorkerSignupPageState extends State<WorkerSignupPage> {
               WidgetHelper.customTextField(
                 controller: _nameController,
                 labelText: 'Full Name',
+                prefixIcon: Icons.person,
               ),
               const SizedBox(
                 height: 16,
@@ -91,11 +93,12 @@ class _WorkerSignupPageState extends State<WorkerSignupPage> {
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const WorkerHomePage()));
-                        authController.signUp(
+                      
+                        AuthController().signUp(
                           _emailController.text,
                           _passwordController.text,
                           _nameController.text,
+                          context,
                         );
                       },
                       style: ElevatedButton.styleFrom(

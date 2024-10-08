@@ -18,10 +18,12 @@ class WidgetHelper {
           obscureText: isPassword && isPasswordVisible,
           keyboardType: keyboardType,
           decoration: InputDecoration(
-            fillColor: AppTheme.whiteColor,
+            fillColor: AppTheme.whiteColor.withOpacity(0.6),
             filled: true,
+            hintStyle: AppTheme.themeData.inputDecorationTheme.hintStyle,
             labelText: labelText,
             labelStyle: AppTheme.themeData.inputDecorationTheme.labelStyle,
+            
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -33,7 +35,7 @@ class WidgetHelper {
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: AppTheme.primaryColor),
             ),
-            prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+            prefixIcon: prefixIcon != null ? Icon(prefixIcon,color: AppTheme.blackColor.withOpacity(0.3),) : null,
             suffixIcon: showPasswordToggle
                 ? IconButton(
                     onPressed: () {
@@ -45,6 +47,7 @@ class WidgetHelper {
                       isPasswordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
+                          
                     ),
                   )
                 : null,

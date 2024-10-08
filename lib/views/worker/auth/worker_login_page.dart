@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work_zone/controllers/auth_controller.dart';
 import 'package:work_zone/views/worker/auth/forgot_password.dart';
+import 'package:work_zone/views/worker/auth/worker_signup_page.dart';
 import 'package:work_zone/views/worker/home/worker_home_page.dart';
 
 import '../../../utils/app_theme.dart';
@@ -84,10 +85,11 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const WorkerHomePage()));
-                        authController.login(
+                    
+                        AuthController().login(
                           _emailController.text,
                           _passwordController.text,
+                          context,
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -108,6 +110,33 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
                     style: const TextStyle(color: Colors.red),
                   ),
                 ),
+                const SizedBox(
+                height: 28,
+              ),
+               RichText(
+                text: TextSpan(
+                  text: "Don't have an Account?",
+                  style: const TextStyle(color: AppTheme.blackColor),
+                  children: [
+                    TextSpan(
+                      text: 'sign up',
+                      style: const TextStyle(
+                        color: AppTheme.primaryColor,
+                        decoration: TextDecoration.underline,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const WorkerSignupPage(),
+                            ),
+                          );
+                        },
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
