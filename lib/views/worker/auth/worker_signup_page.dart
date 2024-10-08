@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:work_zone/controllers/auth_controller.dart';
 import 'package:work_zone/utils/app_theme.dart';
 import 'package:work_zone/views/worker/auth/worker_login_page.dart';
+import 'package:work_zone/views/worker/home/worker_home_page.dart';
 import 'package:work_zone/widgets/widgets_helper.dart';
 
 
@@ -90,9 +91,11 @@ class _WorkerSignupPageState extends State<WorkerSignupPage> {
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
                       onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const WorkerHomePage()));
                         authController.signUp(
                           _emailController.text,
                           _passwordController.text,
+                          _nameController.text,
                         );
                       },
                       style: ElevatedButton.styleFrom(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work_zone/controllers/auth_controller.dart';
 import 'package:work_zone/views/worker/auth/forgot_password.dart';
+import 'package:work_zone/views/worker/home/worker_home_page.dart';
 
 import '../../../utils/app_theme.dart';
 import '../../../widgets/widgets_helper.dart';
@@ -71,7 +72,6 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
                               builder: (context) => const ForgotPassword(),
                             ),
                           );
-                          
                         },
                     ),
                   ],
@@ -84,6 +84,7 @@ class _WorkerLoginPageState extends State<WorkerLoginPage> {
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
                       onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const WorkerHomePage()));
                         authController.login(
                           _emailController.text,
                           _passwordController.text,
